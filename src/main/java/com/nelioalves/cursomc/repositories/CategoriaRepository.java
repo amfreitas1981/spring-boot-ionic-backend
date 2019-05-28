@@ -3,7 +3,7 @@ package com.nelioalves.cursomc.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.nelioalves.cursomc.resources.domain.Categoria;
+import com.nelioalves.cursomc.domain.Categoria;
 
 // Para a Camada de Acesso a Dados (Repository), relacionado a Camada de Domínio:
 // Como fazer para que essa classe possa acessar o Banco de Dados?

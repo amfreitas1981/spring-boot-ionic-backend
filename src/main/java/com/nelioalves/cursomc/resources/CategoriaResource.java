@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nelioalves.cursomc.resources.domain.Categoria;
+import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.services.CategoriaService;
 
 // Inserir anotação @RestController. No momento que inserimos, quando validamos (CTRL + Shift + O), vai aparecer o import org.springframework.web.bind.annotation.RestController.
