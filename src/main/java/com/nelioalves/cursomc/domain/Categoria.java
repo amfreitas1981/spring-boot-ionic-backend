@@ -1,13 +1,16 @@
 package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
-// Inserir anotação @Entity na classe Categoria, que será uma entidade do JPA, importando de: javax.persistence.Entity. SEMPRE!!!
+// Inserir anotação @Entity na classe Categoria, que será uma entidade do JPA, importando de: javax.persistence.Entity, considerando a interface, não a implementação. SEMPRE!!!
 @Entity
 // A classe Categoria é declarada com a implementação "Serializable", conforme o exemplo: ... Categoria implements Serializable... Significa que a sequência gerada na classe será convertida em bytes...
 public class Categoria implements Serializable{
@@ -22,6 +25,12 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	// Implementar a representação, respeitando o nome que consta no papel, tratados neste caso, como uma lista... 
+	@ManyToMany(mappedBy = "categorias") 
+	// A anotação acima serve para "fechar" o relacionamento entre as tabelas "Categoria" e "Produto"...
+	private List<Produto> produtos = new ArrayList<>();
+	
+		
 	// Para inserir todas as configurações do BD que será utilizado no arquivo application.properties, para gerar a Base de Dados...
 
 	// Fazer os Construtores (não incluir coleções no instrutor com parâmetros). Lembrando que o construtor deve ser declarado vazio. Exemplo: linha abaixo...
@@ -53,6 +62,15 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
+	// Criar getters e setters para "produtos", para onde faremos as relações...
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	
 	// Fazer o hashCode() e equals() (padrão: somente o "id"); // Operação para comparar objetos por valor... Source > Generate hashCode() and equals()... Incluir TODOS os campos, SOMENTE o id...
 	// Vai criar automaticamente a anotação @Override, (padrão para Java)
 	// hashCode(): valor numérico para cada objeto... equals(): comparação entre dois objetos, considerando todas as possibilidades... 
@@ -80,6 +98,8 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 	
 	
 	
