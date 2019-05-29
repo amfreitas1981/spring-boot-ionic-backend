@@ -25,6 +25,7 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
+	 
 	// Implementar a representação, respeitando o nome que consta no papel, tratados neste caso, como uma lista... 
 	@ManyToMany(mappedBy = "categorias") 
 	// A anotação acima serve para "fechar" o relacionamento entre as tabelas "Categoria" e "Produto"...
