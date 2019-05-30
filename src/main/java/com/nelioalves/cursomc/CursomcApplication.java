@@ -8,8 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.domain.Cidade;
+import com.nelioalves.cursomc.domain.Estado;
 import com.nelioalves.cursomc.domain.Produto;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
+import com.nelioalves.cursomc.repositories.CidadeRepository;
+import com.nelioalves.cursomc.repositories.EstadoRepository;
 import com.nelioalves.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -20,6 +24,12 @@ public class CursomcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private CidadeRepository cidadeRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -49,6 +59,24 @@ public class CursomcApplication implements CommandLineRunner {
 		categoriaRepository.save(Arrays.asList(cat1, cat2));
 		// Criar uma repository para Produto
 		produtoRepository.save(Arrays.asList(p1, p2, p3));
+		
+		// Instanciar os estados no BD...
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		// Instanciar as cidades no BD...
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Campinas", est2);		
+		
+		// Para associar os estados retornados no BD, utilizando seus relacionamentos (somente o que está relacionado no diagrama)...
+		est1.getCidades().addAll(Arrays.asList(c1));
+		est2.getCidades().addAll(Arrays.asList(c2, c3));
+		
+		// Criar uma repository para Estado
+		estadoRepository.save(Arrays.asList(est1, est2));
+		// Criar uma repository para Cidades
+		cidadeRepository.save(Arrays.asList(c1, c2, c3));
 		
 	}
 	
