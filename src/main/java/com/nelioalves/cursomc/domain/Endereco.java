@@ -1,8 +1,6 @@
 package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Endereco implements Serializable{
@@ -29,6 +29,8 @@ public class Endereco implements Serializable{
 	
 	// Incluir os atributos Cliente e Cidade...
 	// A relação que Endereço exerce entre Cliente e Cidade, são muitos para um. Incluir as anotações @ManyToOne e @JoinColumn...
+	// Para informar que a classe Endereco NÃO PODE serializar a classe Cliente, inserir a anotação @JsonBackReference...
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
