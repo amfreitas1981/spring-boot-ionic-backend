@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 
 @Entity
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
 
 	// Criada a versão padrão da Serializable: "1L"... São exigências do Java...
 	private static final long serialVersionUID = 1L;
@@ -54,6 +54,9 @@ public class Cliente implements Serializable{
 	@ElementCollection
 	@CollectionTable(name="TELEFONE") // Nome da tabela que será criada no banco...
 	private Set<String> telefones = new HashSet<>();
+	
+	// Criar uma relação de associação entre Cliente e Pedido, por ser bidirecional, criando uma lista de "pedidos", como está no papel...
+	private List<Pedido> pedidos = new ArrayList<>();
 	
 	// Criar os construtores...
 	public Cliente() {
@@ -142,6 +145,14 @@ public class Cliente implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 	// Incluir hashCode() e equals(). Lembrando que marcamos SOMENTE o "id"...
 	@Override
@@ -168,6 +179,8 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 	
 	
 }
