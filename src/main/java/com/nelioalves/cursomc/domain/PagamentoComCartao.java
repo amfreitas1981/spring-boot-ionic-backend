@@ -1,7 +1,10 @@
 package com.nelioalves.cursomc.domain;
 
+import javax.persistence.Entity;
+
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
+@Entity
 public class PagamentoComCartao extends Pagamento {
 
 	// Criada a versão padrão da Serializable: "1L"... São exigências do Java...

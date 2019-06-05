@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -11,7 +13,8 @@ import javax.persistence.OneToOne;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
-public class Pagamento implements Serializable {
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Pagamento implements Serializable {
 
 	// Criada a versão padrão da Serializable: "1L"... São exigências do Java...
 	private static final long serialVersionUID = 1L;
@@ -19,7 +22,8 @@ public class Pagamento implements Serializable {
 	@Id
 	private Integer id;
 	// O tipo "EstadoPagamento" será importado da enum que foi criada com o mesmo nome... com.nelioalves.cursomc.domain.enums.EstadoPagamento
-	private EstadoPagamento estado;
+	// Para corrigir bugs para mapeamento no BD, alterando o tipo para Integer...
+	private Integer estado;
 	
 	// Criar um atributo de associação entre Pagamento e Pedido...
 	// Inserir anotações @OneToOne (um para um), @JoinColumn, para facilitar no banco a leitura do id e @MapsId para garantir o mapeamento...  
@@ -34,7 +38,7 @@ public class Pagamento implements Serializable {
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estado = estado;
+		this.estado = estado.getCod();
 		this.pedido = pedido;
 	}
 
@@ -47,11 +51,11 @@ public class Pagamento implements Serializable {
 	}
 
 	public EstadoPagamento getEstado() {
-		return estado;
+		return EstadoPagamento.toEnum(estado);
 	}
 
 	public void setEstado(EstadoPagamento estado) {
-		this.estado = estado;
+		this.estado = estado.getCod();
 	}
 
 	public Pedido getPedido() {

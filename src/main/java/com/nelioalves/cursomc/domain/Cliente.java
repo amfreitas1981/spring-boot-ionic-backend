@@ -56,6 +56,7 @@ public class Cliente implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 	
 	// Criar uma relação de associação entre Cliente e Pedido, por ser bidirecional, criando uma lista de "pedidos", como está no papel...
+	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	
 	// Criar os construtores...

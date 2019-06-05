@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,23 +26,29 @@ public class Pedido implements Serializable {
 	
 	// Criar um atributo de associação entre Pedido e Pagamento...
 	// Utilizar anotação @OneToOne(cascade=CascadeType.ALL, mappedBy="pedido"), que garante o mapeamento e evita erros...
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
+	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") 
 	private Pagamento pagamento;
 	
 	// Criar um atributo de associação entre Pedido e Cliente...
+	// Inserir anotações @ManyToOne e @JoinColumn, para manter a relação, como está no papel (muitos para um)...
+	// @JoinColumn: responsável por criar a chave estrangeira para as duas tabelas...
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
 	// Criar um atributo de associação entre Pedido e Endereco, criando o campo enderecoDeEntrega, como está no papel...
+	@ManyToOne
+	@JoinColumn(name="endereco_de_entrega_id")
 	private Endereco enderecoDeEntrega;
 	
 	public Pedido() {
 	}
 
-	public Pedido(Integer id, Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoDeEntrega) {
+	// Remover a instância referente a Pagamento pagamento, apagando do construtor. Na classe principal vai receber todos os dados, menos "pagamento"...
+	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
-		this.pagamento = pagamento;
 		this.cliente = cliente;
 		this.enderecoDeEntrega = enderecoDeEntrega;
 	}
