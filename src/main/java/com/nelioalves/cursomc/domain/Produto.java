@@ -2,7 +2,9 @@ package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +42,10 @@ public class Produto implements Serializable{
 	// inverseJoinColumns é a chave estrangeira de onde vamos enviar, aplicado na anotação @JoinColumn, criando um nome à sua escolha...
 	private List<Categoria> categorias = new ArrayList<>();
 	
+	// Será feito um conjunto de itens, como segue no papel (diagrama). Itens não faz parte do produto, mas pode ser considerado...
+	// Declarado nas classes Pedido e Produto... Serve para reconhecer os itens associados...
+	private Set<ItemPedido> itens = new HashSet<>();
+	
 	// Incluir construtores...
 	public Produto() {
 	}
@@ -50,6 +56,18 @@ public class Produto implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	// No papel, entendemos que um Pedido pode ter muitos produtos...
+	// Sendo assim, podemos fazer uma lista de ItemPedido, associado a "pedidos"...
+	public List<Pedido> getPedidos(){
+		// Inicia o tratamento de uma lista...
+		List<Pedido> lista = new ArrayList<>();
+		// Percorrer todos os itens da lista. Para cada pedido "x" que constar em itens, será adicionado à lista...  
+		for (ItemPedido x : itens) {
+			lista.add(x.getPedido());
+		}
+		return lista;
 	}
 
 	// Incluir Getters e Setters (todos os campos)...
@@ -84,6 +102,14 @@ public class Produto implements Serializable{
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
+	
+	public Set<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemPedido> itens) {
+		this.itens = itens;
+	}
 
 	// Criar hashCode() e equals(), considerando somente o "id"...
 	@Override
@@ -111,6 +137,5 @@ public class Produto implements Serializable{
 		return true;
 	}
 
-	
 	
 }
