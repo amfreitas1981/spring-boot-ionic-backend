@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -44,6 +45,8 @@ public class Produto implements Serializable{
 	
 	// Será feito um conjunto de itens, como segue no papel (diagrama). Itens não faz parte do produto, mas pode ser considerado...
 	// Declarado nas classes Pedido e Produto... Serve para reconhecer os itens associados...
+	// Como já foi feita a anotação @ManyToOne nas classes Pedido e Produto, agora será feita ao contrário, declarando: @OneToMany
+	@OneToMany(mappedBy="id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	// Incluir construtores...

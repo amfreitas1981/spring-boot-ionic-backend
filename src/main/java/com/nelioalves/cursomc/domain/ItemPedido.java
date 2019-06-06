@@ -2,6 +2,10 @@ package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+
+@Entity
 public class ItemPedido implements Serializable{
 
 	// Criada a versão padrão da Serializable: "1L"... São exigências do Java...
@@ -15,6 +19,8 @@ public class ItemPedido implements Serializable{
 	// Esta classe terá uma referência para Produto e pedido...
 	
 	// A classe auxiliar será instanciada como objeto...
+	// Fazer uma anotação chamada @EmbeddedId. Funciona como um "id" embutido numa classe auxiliar...
+	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	// O "id" que foi criado vai servir como uma chave composta, semelhante aos tipos primitivos que já foram criados...
 	

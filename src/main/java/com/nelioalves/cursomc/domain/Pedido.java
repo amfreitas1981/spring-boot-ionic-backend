@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -45,6 +46,8 @@ public class Pedido implements Serializable {
 	
 	// Será feito um conjunto de itens, como segue no papel (diagrama). Itens não faz parte do produto, mas pode ser considerado...
 	// Declarado nas classes Pedido e Produto... Serve para reconhecer os itens associados...
+	// Como já foi feita a anotação @ManyToOne nas classes Pedido e Produto, agora será feita ao contrário, declarando: @OneToMany
+	@OneToMany(mappedBy="id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
 	public Pedido() {
