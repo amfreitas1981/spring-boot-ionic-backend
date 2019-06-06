@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -46,6 +47,7 @@ public class Produto implements Serializable{
 	// Será feito um conjunto de itens, como segue no papel (diagrama). Itens não faz parte do produto, mas pode ser considerado...
 	// Declarado nas classes Pedido e Produto... Serve para reconhecer os itens associados...
 	// Como já foi feita a anotação @ManyToOne nas classes Pedido e Produto, agora será feita ao contrário, declarando: @OneToMany
+	@JsonIgnore
 	@OneToMany(mappedBy="id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 	
@@ -63,6 +65,7 @@ public class Produto implements Serializable{
 	
 	// No papel, entendemos que um Pedido pode ter muitos produtos...
 	// Sendo assim, podemos fazer uma lista de ItemPedido, associado a "pedidos"...
+	@JsonIgnore
 	public List<Pedido> getPedidos(){
 		// Inicia o tratamento de uma lista...
 		List<Pedido> lista = new ArrayList<>();

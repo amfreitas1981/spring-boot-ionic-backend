@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 
@@ -56,6 +57,7 @@ public class Cliente implements Serializable {
 	private Set<String> telefones = new HashSet<>();
 	
 	// Criar uma relação de associação entre Cliente e Pedido, por ser bidirecional, criando uma lista de "pedidos", como está no papel...
+	@JsonBackReference
 	@OneToMany(mappedBy="cliente")
 	private List<Pedido> pedidos = new ArrayList<>();
 	

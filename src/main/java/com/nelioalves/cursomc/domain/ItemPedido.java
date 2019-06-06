@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class ItemPedido implements Serializable{
 
@@ -20,6 +22,7 @@ public class ItemPedido implements Serializable{
 	
 	// A classe auxiliar será instanciada como objeto...
 	// Fazer uma anotação chamada @EmbeddedId. Funciona como um "id" embutido numa classe auxiliar...
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	// O "id" que foi criado vai servir como uma chave composta, semelhante aos tipos primitivos que já foram criados...
