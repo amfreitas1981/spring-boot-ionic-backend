@@ -52,6 +52,7 @@ public class ItemPedido implements Serializable{
 
 	// Criar um "get" para Pedido e Produto...
 	// Serve para ter acesso direto ao Pedido e Produto fora da classe ItemPedido, melhorando a semântica da classe...
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}

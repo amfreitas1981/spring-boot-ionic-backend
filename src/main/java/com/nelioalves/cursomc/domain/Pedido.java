@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -27,6 +28,8 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	// Ao declarar o atributo do tipo Date, devemos importar de "java.util.Date"... SEMPRE!!!
+	// A anotação @JsonFormat serve para configurar a formatação de data/hora para o atributo desejado...
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date instante;
 	
 	// Criar um atributo de associação entre Pedido e Pagamento...

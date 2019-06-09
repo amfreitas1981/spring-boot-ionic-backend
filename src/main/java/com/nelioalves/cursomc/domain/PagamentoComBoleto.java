@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 
 @Entity
@@ -12,7 +13,11 @@ public class PagamentoComBoleto extends Pagamento {
 	// Criada a versão padrão da Serializable: "1L"... São exigências do Java...
 	private static final long serialVersionUID = 1L;
 
+	// A anotação @JsonFormat serve para configurar a formatação de data/hora para o atributo desejado...
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataVencimento;
+	
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataPagamento;
 	
 	// Por ser uma subclasse, devemos criar o construtor vazio... 
