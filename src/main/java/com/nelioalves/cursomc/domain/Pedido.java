@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Pedido implements Serializable {
@@ -34,14 +33,14 @@ public class Pedido implements Serializable {
 	
 	// Criar um atributo de associação entre Pedido e Pagamento...
 	// Utilizar anotação @OneToOne(cascade=CascadeType.ALL, mappedBy="pedido"), que garante o mapeamento e evita erros...
-	@JsonManagedReference
+	// @JsonManagedReference
 	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido") 
 	private Pagamento pagamento;
 	
 	// Criar um atributo de associação entre Pedido e Cliente...
 	// Inserir anotações @ManyToOne e @JoinColumn, para manter a relação, como está no papel (muitos para um)...
 	// @JoinColumn: responsável por criar a chave estrangeira para as duas tabelas...
-	@JsonManagedReference
+	// @JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -143,6 +142,5 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
-
 	
 }

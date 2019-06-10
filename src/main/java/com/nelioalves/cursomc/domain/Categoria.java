@@ -25,7 +25,8 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	 
+	// Como houve problemas quando inseriu as anotações @JsonManagedReference e @JsonBackReference, será removida...
+	// @JsonManagedReference
 	// Implementar a representação, respeitando o nome que consta no papel, tratados neste caso, como uma lista... 
 	@ManyToMany(mappedBy = "categorias") 
 	// A anotação acima serve para "fechar" o relacionamento entre as tabelas "Categoria" e "Produto"...

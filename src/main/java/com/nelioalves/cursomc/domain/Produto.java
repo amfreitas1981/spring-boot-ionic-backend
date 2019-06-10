@@ -15,7 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -31,7 +30,9 @@ public class Produto implements Serializable{
 	private String nome;
 	private double preco;
 	
-	@JsonBackReference // É uma referência criada pelo JSON, importando de: com.fasterxml.jackson.annotation.JsonBackReference, como originou o erro quando testou...
+	// @JsonBackReference // É uma referência criada pelo JSON, importando de: com.fasterxml.jackson.annotation.JsonBackReference, como originou o erro quando testou...
+	// Será alterada para a anotação @JsonIgnore, porque apresentou erros durante os testes... 
+	@JsonIgnore
 	// Implementar a representação, respeitando o nome que consta no papel, tratados neste caso, como uma lista...
 	@ManyToMany // Para fazer a relação muitos para muitos, que pode ser adiciona em um dos lados da relação...
 	// Para fazer a relação dos "id" das duas tabelas...
@@ -142,6 +143,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-
 	
 }

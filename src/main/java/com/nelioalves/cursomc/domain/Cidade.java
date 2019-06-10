@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 public class Cidade implements Serializable{
@@ -26,7 +24,7 @@ public class Cidade implements Serializable{
 	// A relação está bem clara no diagrama. No papel, temos um Estado para muitas cidades. Portanto, não teremos lista...
 	// Na classe Cidade, inserir a anotação @ManyToOne, importada de: javax.persistence, que serve para fazer a relação de "muitas cidades para um estado"...
 	// Adicionar a anotação @JsonManagedReference...
-	@JsonManagedReference
+	// @JsonManagedReference
 	@ManyToOne
 	// Inserir a anotação @JoinColumn, para fazer a junção das tabelas e criar uma chave primária...
 	@JoinColumn(name="estado_id")

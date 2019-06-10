@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Endereco implements Serializable{
@@ -30,7 +30,9 @@ public class Endereco implements Serializable{
 	// Incluir os atributos Cliente e Cidade...
 	// A relação que Endereço exerce entre Cliente e Cidade, são muitos para um. Incluir as anotações @ManyToOne e @JoinColumn...
 	// Para informar que a classe Endereco NÃO PODE serializar a classe Cliente, inserir a anotação @JsonBackReference...
-	@JsonBackReference
+	// Como ocorreu problemas nos testes de requisição Json, alterar a anotação de: @JsonBackReference, para: @JsonIgnore...
+	// @JsonBackReference
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
